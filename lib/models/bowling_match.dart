@@ -32,6 +32,13 @@ class BowlingMatch {
 
   /// method to return the current match score
   get score {
-    return frames.fold(0, (int acc, frame) => acc + frame.bowls.sum);
+    // return frames.fold(0, (int acc, frame) => acc + frame.bowls.sum);
+    return frames.fold(0, (int acc, frame) {
+      int frameScore = frame.bowls.sum;
+      // hmm the only problem here is that for a spare or strike we actually need balls from the next frame.
+      // and actually if there is a series of strikes the balls needed could be two frames away...
+      // not to mention that on the last frame the logic to get next frames would make your head spin
+      return acc + frameScore;
+    });
   }
 }

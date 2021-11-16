@@ -38,9 +38,4 @@ https://www.bowlinggenius.com/
 
 ## Step Notes
 
-- At this point we have a failing test because score returns a hard coded 0
-- We will try to knock down pins on rolls now
-- frames is actually always 10 and so frames can be pre init
-- the match needs a way of determing what frame we are on to record the roll into
-- A frame while not able to calculate itself, can determine if it is a strike or spare
-- at this point there is a test which fails because spares and strikes are not considered
+- attempting to write how frames calculate there score and ran into an issue. Going for linch and to think about the problem
