@@ -19,6 +19,10 @@ class BowlingMatch {
     stepThroughFrame(frame);
   }
 
+  List<int> get rolls {
+    return frames.fold([], (acc, frame) => [...acc, ...frame.bowls]);
+  }
+
   bool get canRoll {
     if (frameIndex < 10) return true;
     return false;
@@ -32,13 +36,20 @@ class BowlingMatch {
 
   /// method to return the current match score
   get score {
-    // return frames.fold(0, (int acc, frame) => acc + frame.bowls.sum);
-    return frames.fold(0, (int acc, frame) {
-      int frameScore = frame.bowls.sum;
-      // hmm the only problem here is that for a spare or strike we actually need balls from the next frame.
-      // and actually if there is a series of strikes the balls needed could be two frames away...
-      // not to mention that on the last frame the logic to get next frames would make your head spin
-      return acc + frameScore;
-    });
+    int _score = 0;
+    final _framesWithBowls =
+        frames.where((frame) => frame.bowls.length > 0).toList();
+    // for each frame work out its score
+    for (int i = 0; i < _framesWithBowls.length; i++) {
+      var frame = _framesWithBowls[i];
+      int pinScore = frame.bowls[0] + frame.bowls[1];
+      if (frame.isSpare) {
+        // we will need to step through all rolls and determine what rollIndex the frame roll is from
+        // that way we can get next rolls to calculate the frame
+        // _score = 10 +
+      }
+      _score += pinScore;
+    }
+    return _score;
   }
 }

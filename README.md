@@ -38,4 +38,4 @@ https://www.bowlinggenius.com/
 
 ## Step Notes
 
-- attempting to write how frames calculate there score and ran into an issue. Going for linch and to think about the problem
+- rolls is basically how you determine a frames score as for spares and strikes we must have future balls.
