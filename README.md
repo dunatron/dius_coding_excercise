@@ -39,3 +39,4 @@ https://www.bowlinggenius.com/
 ## Step Notes
 
 - rolls is basically how you determine a frames score as for spares and strikes we must have future balls.
+- `stepThroughFrame` needed to be altered as the logic is a bit different on the last frame as they may get an extra ball

@@ -25,6 +25,11 @@ class BowlingFrame {
     return bowls[0] == 10;
   }
 
+  int get pinScore {
+    if (bowls.length < 2) return 0;
+    return bowls[0] + bowls[1];
+  }
+
   int get numOfBowls {
     return bowls.length;
   }
