@@ -57,6 +57,12 @@ class BowlingMatch {
     for (int i = 0; i < _framesWithBowls.length; i++) {
       var frame = _framesWithBowls[i];
       // int pinScore = frame.pinScore;
+      if (frame.isStrike) {
+        _score += makeStrikeScore(_rollIndex);
+        _rollIndex++;
+        continue;
+      }
+
       if (frame.isSpare) {
         // we will need to step through all rolls and determine what rollIndex the frame roll is from
         // that way we can get next rolls to calculate the frame
@@ -70,12 +76,20 @@ class BowlingMatch {
     return _score;
   }
 
-  /// gets a spare score by adding 10
+  /// gets a spare score by adding 10 + the value 2 balls away i.e next frames first ball
   int makeSpareScore(int rollIndex) {
     // we dont have all the balls needed to calculate this so i think nothing gets added...
     if (rollIndex + 2 >= rolls.length) {
       return 0;
     }
     return 10 + rolls[rollIndex + 2];
+  }
+
+  /// gets strike score by adding 10 + the values for the next 2 balls
+  int makeStrikeScore(int rollIndex) {
+    if (rollIndex + 2 >= rolls.length) {
+      return 0;
+    }
+    return 10 + rolls[rollIndex + 1] + rolls[rollIndex + 2];
   }
 }

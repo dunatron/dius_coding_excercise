@@ -49,4 +49,25 @@ void main() {
     }
     expect(match.score, equals(190));
   });
+
+  test('Test the perfect game of strikes', () {
+    final match = BowlingMatch(player);
+    int i = 1;
+    while (i <= 12) {
+      match.roll(10);
+      print(match.score);
+      ++i;
+    }
+    expect(match.score, equals(300));
+  });
+  test('Test the perfect game of strikes with overloaded rolls', () {
+    final match = BowlingMatch(player);
+    int i = 1;
+    while (i <= 50) {
+      match.roll(10);
+      print(match.score);
+      ++i;
+    }
+    expect(match.score, equals(300));
+  });
 }
