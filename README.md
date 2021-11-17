@@ -28,6 +28,12 @@ match.roll(int pins);
 int _currScore = match.score;
 ```
 
+## Testing
+
+There is testing included in the `/tests` directory  
+from the root of the project run the following  
+`dart run test tests`
+
 ## Tools
 
 I was a little unsure of what scores should be so I found this bowling calculator
