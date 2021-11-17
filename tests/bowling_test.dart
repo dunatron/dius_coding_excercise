@@ -55,7 +55,6 @@ void main() {
     int i = 1;
     while (i <= 12) {
       match.roll(10);
-      print(match.score);
       ++i;
     }
     expect(match.score, equals(300));
@@ -65,7 +64,6 @@ void main() {
     int i = 1;
     while (i <= 50) {
       match.roll(10);
-      print(match.score);
       ++i;
     }
     expect(match.score, equals(300));

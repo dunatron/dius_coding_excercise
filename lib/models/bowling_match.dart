@@ -1,5 +1,3 @@
-import 'package:collection/collection.dart';
-
 import './player.dart';
 import './bowling_frame.dart';
 
@@ -23,23 +21,26 @@ class BowlingMatch {
     return frames.fold([], (acc, frame) => [...acc, ...frame.bowls]);
   }
 
+  BowlingFrame get currentFrame {
+    return frames[frameIndex];
+  }
+
   bool get canRoll {
     if (frameIndex < 10) return true;
     return false;
   }
 
+  bool get getsExtraBall {
+    return isLastFrame && (currentFrame.isSpare || currentFrame.isStrike);
+  }
+
+  bool get isLastFrame {
+    return frameIndex == 9;
+  }
+
   void stepThroughFrame(BowlingFrame frame) {
-    if (frameIndex == 9) {
-      int numOfBowls = frame.bowls.length;
-      if (numOfBowls >= 2) {
-        if (frame.isSpare || frame.isStrike) {
-          if (numOfBowls >= 3) {
-            frameIndex++;
-          }
-        } else {
-          frameIndex++;
-        }
-      }
+    // will stop frameIndex from incrementing early on the last frame and allow third ball
+    if (getsExtraBall && frame.bowls.length < 3) {
       return;
     }
     if (frame.isStrike || frame.isSpare || frame.numOfBowls >= 2) {
@@ -56,7 +57,6 @@ class BowlingMatch {
     // for each frame work out its score
     for (int i = 0; i < _framesWithBowls.length; i++) {
       var frame = _framesWithBowls[i];
-      // int pinScore = frame.pinScore;
       if (frame.isStrike) {
         _score += makeStrikeScore(_rollIndex);
         _rollIndex++;
@@ -64,8 +64,6 @@ class BowlingMatch {
       }
 
       if (frame.isSpare) {
-        // we will need to step through all rolls and determine what rollIndex the frame roll is from
-        // that way we can get next rolls to calculate the frame
         _score += makeSpareScore(_rollIndex);
       } else {
         _score += frame.pinScore;
